@@ -1,12 +1,16 @@
+import java.util.Scanner;
+
 public class Main{
     public static void main(String[] args){
         Player player = new Player();
-        System.out.println(player);
-
-        Entity[][] map = makeMap(5,5);
-        printMap(map);
-        map[0][0] = player;
-        printMap(map);
+        while(true){
+            System.out.println(player);
+            Entity[][] map = makeMap(5,5);
+            printMap(map);
+            map[player.getY()][player.getX()] = player;
+            printMap(map);
+            collectInput(player);
+    }
     }
     public static Entity[][] makeMap(int r, int c){
         Entity[][] map = new Entity[r][c];
@@ -26,5 +30,14 @@ public class Main{
             }
             System.out.println();
         }
+    }
+    public static void collectInput(Player player){
+        Scanner input = new Scanner(System.in);
+        System.out.println("up, down, left, right");
+        String choice = input.nextLine();
+        while (!choice.equals("up") && !choice.equals("down") && !choice.equals("left") && !choice.equals("right")){
+            choice = input.nextLine();
+        }
+        player.move(choice);
     }
 }
