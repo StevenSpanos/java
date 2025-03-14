@@ -1,15 +1,19 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main{
     public static void main(String[] args){
         Player player = new Player();
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+        createEnemy("baller",5,"X",enemies);
         while(true){
-            System.out.println(player);
             Entity[][] map = makeMap(5,5);
             printMap(map);
             map[player.getY()][player.getX()] = player;
+            setEnemies(map, enemies);
             printMap(map);
             collectInput(player);
+            updateEnemies(enemies);
     }
     }
     public static Entity[][] makeMap(int r, int c){
@@ -40,6 +44,33 @@ public class Main{
             choice = input.nextLine();
         }
         player.move(choice);
+    }
+    public static void createEnemy(String n, int h, String c,ArrayList<Enemy> enemies){
+        //Enemy enemy = new Enemy(n,h,c,(int) Math.random()*5, (int) Math.random()*5);
+        Enemy enemy = new Enemy();
+        enemies.add(enemy);
+    }
+    //fix please it doesn't workkk
+    public static void updateEnemies(ArrayList<Enemy> enemies){
+        for(int i = 0; i < enemies.size(); i++){
+            enemies.get(i).move(enemies.get(i).getX()-1,enemies.get(i).getY()-1);
+        }
+    }
+    public static void setEnemies(Entity[][] map, ArrayList<Enemy> enemies){
+        int count = 0;
+        for(int r = 0; r < map.length; r++){
+            if(count >= enemies.size()){
+                break;
+            }
+            for(int c = 0; c < map[r].length; c++){
+                if(r == enemies.get(count).getY()){
+                    if(c == enemies.get(count).getX()){
+                        map[r][c] = enemies.get(count);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
 }

@@ -18,6 +18,10 @@ public class Entity{
         this.x = x;
         this.y = y;
     }
+    public void move(int x, int y){
+        setX(getX() + x);
+        setY(getY() + y);
+    }
 
     public String toString(){
         return "Health: " + health + " Name: " + name + " Character: " + character + " (X,Y): ("+x+","+y+")";
