@@ -11,6 +11,10 @@ public class Player extends Entity{
         if(input.equals("down")) setY(getY()+1);
         if(input.equals("right")) setX(getX()+1);
         if(input.equals("left")) setX(getX()-1);
+        if(getY() > 4) setY(0);
+        if(getY() < 0) setY(4);
+        if(getX() > 4) setX(0);
+        if(getX() < 0) setX(4);
     }
 
 }
