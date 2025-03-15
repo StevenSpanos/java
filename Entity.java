@@ -21,6 +21,10 @@ public class Entity{
     public void move(int x, int y){
         setX(getX() + x);
         setY(getY() + y);
+        if(getY() > 4) setY(0);
+        if(getY() < 0) setY(4);
+        if(getX() > 4) setX(0);
+        if(getX() < 0) setX(4);
     }
 
     public String toString(){
