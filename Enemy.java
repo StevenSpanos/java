@@ -14,6 +14,9 @@ public class Enemy extends Entity{
     public void setMove(boolean b){
         canMove = b;
     }
+    public String getInfo(){
+        return "Health: " + getHealth() + " Name: " + getName() + " Character: " + getCharacter() + " (X,Y): ("+getX()+","+getY()+")" + " can move? " + canMove;
+    }
     public String toString(){
         return getCharacter();
     }
