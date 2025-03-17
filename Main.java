@@ -2,17 +2,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main{
-    //commit test
     public static void main(String[] args){
         Player player = new Player();
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-        createEnemy("baller",5,"X",enemies);
+        enemies = createEnemy("baller",5,"X",true,4,4,enemies);
+        enemies = createEnemy("peepee",5,"B",false,2,2,enemies);
         while(true){
             Entity[][] map = makeMap(5,5);
-            printMap(map);
             map[player.getY()][player.getX()] = player;
             setEnemies(map, enemies);
             printMap(map);
+            //printEnemies(enemies);
             collectInput(player);
             updateEnemies(enemies);
     }
@@ -46,31 +46,41 @@ public class Main{
         }
         player.move(choice);
     }
-    public static void createEnemy(String n, int h, String c,ArrayList<Enemy> enemies){
+
+    public static ArrayList<Enemy> createEnemy(String n, int h, String c, boolean b, int x, int y, ArrayList<Enemy> enemies){
         //Enemy enemy = new Enemy(n,h,c,(int) Math.random()*5, (int) Math.random()*5);
-        Enemy enemy = new Enemy();
+        Enemy enemy = new Enemy(n,h,c,x,y,b);
         enemies.add(enemy);
+        return enemies;
     }
 
     public static void updateEnemies(ArrayList<Enemy> enemies){
         for(int i = 0; i < enemies.size(); i++){
-            enemies.get(i).move((int) Math.round(Math.random()-0.4),(int) Math.round(Math.random()-0.4));
+            //enemies.get(i).move((int) Math.round(Math.random()-0.4),(int) Math.round(Math.random()-0.4));
+            if(enemies.get(i).canMove()){
+            enemies.get(i).move((int) (Math.random()*3)-1,(int) (Math.random()*3)-1);
+            }
         }
     }
     public static void setEnemies(Entity[][] map, ArrayList<Enemy> enemies){
         int count = 0;
         for(int r = 0; r < map.length; r++){
             if(count >= enemies.size()){
-                break;
+                return;
             }
             for(int c = 0; c < map[r].length; c++){
                 if(r == enemies.get(count).getY()){
                     if(c == enemies.get(count).getX()){
                         map[r][c] = enemies.get(count);
-                        break;
+                        count++;
                     }
                 }
             }
+        }
+    }
+    public static void printEnemies(ArrayList<Enemy> enemies){
+        for(Enemy e : enemies){
+            System.out.println(e.toString());
         }
     }
 
