@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main{
+    //commit test
     public static void main(String[] args){
         Player player = new Player();
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
