@@ -2,18 +2,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main{
-    public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     public static void main(String[] args){
         Player player = new Player();
-        createEnemy("baller",5,"X");
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+        createEnemy("baller",5,"X",enemies);
         while(true){
             Entity[][] map = makeMap(5,5);
             printMap(map);
             map[player.getY()][player.getX()] = player;
-            setEnemies(map);
+            setEnemies(map, enemies);
             printMap(map);
             collectInput(player);
-            updateEnemies();
+            updateEnemies(enemies);
     }
     }
     public static Entity[][] makeMap(int r, int c){
@@ -41,27 +41,22 @@ public class Main{
         System.out.println("up, down, left, right");
         String choice = input.nextLine();
         while (!choice.equals("up") && !choice.equals("down") && !choice.equals("left") && !choice.equals("right")){
-            if(choice.equals("enemies")){
-                for(int i = 0; i < enemies.size(); i++){
-                    System.out.println(enemies.get(i));
-                }
-            }
             choice = input.nextLine();
         }
         player.move(choice);
     }
-    public static void createEnemy(String n, int h, String c){
-        Enemy enemy = new Enemy(n,h,c,(int) (Math.random()*5), (int) (Math.random()*5));
-        //Enemy enemy = new Enemy();
+    public static void createEnemy(String n, int h, String c,ArrayList<Enemy> enemies){
+        //Enemy enemy = new Enemy(n,h,c,(int) Math.random()*5, (int) Math.random()*5);
+        Enemy enemy = new Enemy();
         enemies.add(enemy);
     }
-    //fix please it doesn't workkk
-    public static void updateEnemies(){
+
+    public static void updateEnemies(ArrayList<Enemy> enemies){
         for(int i = 0; i < enemies.size(); i++){
-            enemies.get(i).move((int) (Math.random()*2)-1,(int) (Math.random()*2)-1);
+            enemies.get(i).move((int) Math.round(Math.random()-0.4),(int) Math.round(Math.random()-0.4));
         }
     }
-    public static void setEnemies(Entity[][] map){
+    public static void setEnemies(Entity[][] map, ArrayList<Enemy> enemies){
         int count = 0;
         for(int r = 0; r < map.length; r++){
             if(count >= enemies.size()){
