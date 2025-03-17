@@ -21,10 +21,10 @@ public class Entity{
     public void move(int dx, int dy){
         setX(getX() + dx);
         setY(getY() + dy);
-        if((dx > 0) && (getX() == 4)) move(-dx,0);
-        if((dx < 0) && (getX() == 0)) move(-dx,0);
-        if((dy > 0) && (getY() == 4)) move(0,-dy);
-        if((dy < 0) && (getY() == 0)) move(0,-dy);
+        if((dx > 0) && (getX() > 4)) move(-dx,0);
+        if((dx < 0) && (getX() < 0)) move(-dx,0);
+        if((dy > 0) && (getY() > 4)) move(0,-dy);
+        if((dy < 0) && (getY() < 0)) move(0,-dy);
     }
 
     public String toString(){
