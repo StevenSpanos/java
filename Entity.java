@@ -18,13 +18,13 @@ public class Entity{
         this.x = x;
         this.y = y;
     }
-    public void move(int x, int y){
-        setX(getX() + x);
-        setY(getY() + y);
-        if(getY() > 4) setY(0);
-        if(getY() < 0) setY(4);
-        if(getX() > 4) setX(0);
-        if(getX() < 0) setX(4);
+    public void move(int dx, int dy){
+        setX(getX() + dx);
+        setY(getY() + dy);
+        if((dx > 0) && (getX() == 4)) move(-dx,0);
+        if((dx < 0) && (getX() == 0)) move(-dx,0);
+        if((dy > 0) && (getY() == 4)) move(0,-dy);
+        if((dy < 0) && (getY() == 0)) move(0,-dy);
     }
 
     public String toString(){
