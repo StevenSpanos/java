@@ -5,8 +5,8 @@ public class Main{
     public static void main(String[] args){
         Player player = new Player();
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-        enemies = createEnemy("baller",5,"X",true,4,4,enemies);
-        enemies = createEnemy("peepee",1,"B",false,2,2,enemies);
+        //enemies = createEnemy("baller",5,"X",true,4,4,enemies);
+        enemies = createEnemy("peepee",1,"X",false,2,2,enemies);
         while(true){
             Entity[][] map = makeMap(5,5);
             map = setEnemies(map, enemies);
@@ -57,6 +57,9 @@ public class Main{
     }
 
     public static void updateEnemies(ArrayList<Enemy> enemies){
+        if(enemies.size() < 1){
+            enemies = createEnemy("peepee",1,"X",false,(int) (Math.random()*5),(int) (Math.random()*5),enemies);
+        }
         for(int i = 0; i < enemies.size(); i++){
             //enemies.get(i).move((int) Math.round(Math.random()-0.4),(int) Math.round(Math.random()-0.4));
             if((enemies.get(i)).canMove()){
