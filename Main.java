@@ -6,12 +6,13 @@ public class Main{
         Player player = new Player();
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
         enemies = createEnemy("baller",5,"X",true,4,4,enemies);
-        enemies = createEnemy("peepee",5,"B",false,2,2,enemies);
+        enemies = createEnemy("peepee",1,"B",false,2,2,enemies);
         while(true){
             Entity[][] map = makeMap(5,5);
             map = setEnemies(map, enemies);
             map[player.getY()][player.getX()] = player;
             printMap(map);
+            checkAttack(player, enemies);
             //printEnemies(enemies);
             collectInput(player);
             updateEnemies(enemies);
@@ -92,6 +93,18 @@ public class Main{
     public static void printEnemies(ArrayList<Enemy> enemies){
         for(int i = 0; i < enemies.size(); i++){
             System.out.println(enemies.get(i).getInfo());
+        }
+    }
+    public static void checkAttack(Player player, ArrayList<Enemy> enemies){
+        for(int i = 0; i < enemies.size(); i++){
+            if(enemies.get(i).getX() == player.getX()){
+                if(enemies.get(i).getY() == player.getY()){
+                    if(enemies.get(i).damage(player.getAttack())){
+                        enemies.remove(i);
+                        i--;
+                    }
+                }
+            }
         }
     }
 

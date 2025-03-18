@@ -26,7 +26,11 @@ public class Entity{
         if((dy > 0) && (getY() > 4)) move(0,-dy);
         if((dy < 0) && (getY() < 0)) move(0,-dy);
     }
-
+    public boolean damage(int d){
+        setHealth(getHealth() - d);
+        if(getHealth() <= 0) return true;
+            return false;
+    }
     public String toString(){
         return "Health: " + health + " Name: " + name + " Character: " + character + " (X,Y): ("+x+","+y+")";
     }
