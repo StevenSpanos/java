@@ -63,15 +63,17 @@ public class Main{
             }
         }
     }
+
     public static Entity[][] setEnemies(Entity[][] map, ArrayList<Enemy> enemies){
-        int count = 0;
+        /*
+        int i = 0;
         for(int r = 0; r < map.length; r++){
             for(int c = 0; c < map[r].length; c++){
-                if(r == (enemies.get(count)).getY()){
-                    if(c == (enemies.get(count)).getX()){
-                        map[r][c] = enemies.get(count);
-                        count++;
-                        if(count >= enemies.size()){
+                if((enemies.get(i)).getY() == r){
+                    if((enemies.get(i)).getX() == c){
+                        map[r][c] = enemies.get(i);
+                        i++;
+                        if(i >= enemies.size()){
                             return map;
                         }
                     }
@@ -79,7 +81,14 @@ public class Main{
             }
         }
         return map;
+        */
+       
+       for(Enemy e : enemies){
+            map[e.getY()][e.getX()] = e;
+       }
+       return map;
     }
+
     public static void printEnemies(ArrayList<Enemy> enemies){
         for(int i = 0; i < enemies.size(); i++){
             System.out.println(enemies.get(i).getInfo());

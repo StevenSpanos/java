@@ -2,8 +2,8 @@ public class Entity{
     private int health;
     private String name;
     private String character;
-    private int x = 0;
-    private int y = 0;
+    private int x;
+    private int y;
     public Entity(){
         name = "[]";
         health = 5;
