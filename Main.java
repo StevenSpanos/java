@@ -12,7 +12,7 @@ public class Main{
             map = setEnemies(map, enemies);
             map[player.getY()][player.getX()] = player;
             printMap(map);
-            printEnemies(enemies);
+            //printEnemies(enemies);
             collectInput(player);
             updateEnemies(enemies);
     }
